@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sirius Turnstile</title>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=ready&render=explicit" async defer></script>
+<script>
+let widgetId = null;
+function ready() {
+  widgetId = turnstile.render('#challenge', {
+    sitekey: '0x4AAAAAAE4Yb4FqKM_qx4B1',
+    action: 'register',
+    callback: function(token) {
+      document.getElementById('token').textContent = token;
+      document.title = 'TOKEN_READY';
+    },
+    'expired-callback': function() { document.title = 'TOKEN_EXPIRED'; },
+    'error-callback': function() { document.title = 'TOKEN_ERROR'; },
+    'timeout-callback': function() { document.title = 'TOKEN_TIMEOUT'; }
+  });
+}
+</script>
+</head>
+<body>
+<h1>Sirius register Turnstile</h1>
+<div id="challenge"></div>
+<p>Token:</p>
+<pre id="token">(waiting)</pre>
+</body>
+</html>
